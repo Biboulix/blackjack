@@ -54,7 +54,6 @@ can.create_image(coord_x[3],coord_y_ordi[0], image = image, anchor=NW)
 # Bouton #
 
 Button(fen,text='Quitter',command=fen.quit, highlightbackground='#3E4149').grid(row=0,column=1)
-Button(fen,text='Carte',command=valeur, highlightbackground='#3E4149').grid(row=0,column=2)
 
 #--------------------------------------------------------------#
 # Initatilisation de fenetre master
