@@ -42,6 +42,9 @@ for f in range(0,6):
     can.create_rectangle(x7,y7,x8,y8,outline="snow")
     x7,x8 = x7+160, x8+160
 #--------------------------------------------------------------#
+# Bouton #
+Button(fen,text='Quitter',command=fen.quit, highlightbackground='#3E4149').grid(row=0,column=1)
+#--------------------------------------------------------------#
 # Initatilisation de fenetre master
 
 fen.mainloop()
