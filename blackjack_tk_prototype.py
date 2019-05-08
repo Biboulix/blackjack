@@ -42,10 +42,6 @@ for f in range(0,6):
 #--------------------------------------------------------------#
 # Test de posage de cartes
 
-k = randint(0,3)
-valeur = randint(0,12) * 4 + k
-image = PhotoImage(file=liste_carte[valeur])
-can.create_image(coord_x[3],coord_y_ordi[0], image = image, anchor=NW)
 
 
 
