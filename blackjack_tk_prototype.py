@@ -41,9 +41,11 @@ for f in range(0,6):
 
 #--------------------------------------------------------------#
 # Test de posage de cartes
-
-
-
+k = randint(0,12)
+coul = randint(0,3)
+car = k * 4 + coul
+carte = PhotoImage(file=liste_carte[car])
+can.create_image(coord_x[0],coord_y_joueur[0], image=carte, anchor = NW)
 
 
 #--------------------------------------------------------------#
