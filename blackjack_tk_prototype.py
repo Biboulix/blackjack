@@ -41,14 +41,17 @@ def sabot() :
     sabot = random.randint(1,13)
 
     if sabot == 11 :
+        print("valet")
         valeur = valeur + 10
         image(sabot,nb_carte)
 
     elif sabot == 12 :
+        print("dame")
         valeur = valeur + 10
         image(sabot,nb_carte)
 
     elif sabot == 13 :
+        print("roi")
         valeur = valeur + 10
         image(sabot,nb_carte)
 
