@@ -1,5 +1,7 @@
 #coding : utf-8
 import random
+import pickle
+import base_de_donnee
 #---------------------------------------------------------------------#
 def compte_joueur() :
 	compte_courant = 500
@@ -26,21 +28,6 @@ def valeur_as() :
 	else :
 		print("votre as vaut désormais 11")
 		return 11
-#---------------------------------------------------------------------#
-def assurance() :
-	global mise_joueur
-	global compte_courant
-	assurance = mise_joueur%2
-	compte_courant = compte_courant - assurance
-	print("vous avez dsormais une assurance de",assurance,"$ ")
-#---------------------------------------------------------------------#
-def split() :
-	global mise_joueur
-	global compte_courant
-	split = mise_joueur * 2
-	compte_courant =- split
-	pioche = carte_en_plus
-
 #---------------------------------------------------------------------#
 #pioche
 def sabot() :
@@ -111,4 +98,9 @@ sabot()
 choix_partie = choix_partie()
 
 #--------------------------------------------------------------------#
-#choix pour la partie
+#base de  donnée
+pseudo={"tz" : 20, "tf" : 100 , "gl" : 20}
+
+with open('base_de_donnée', 'wb') as fichier :
+	mon_pickle = pikle.Pickler(fichier)
+	mon_pickle.dump(pseudo)
