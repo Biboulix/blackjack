@@ -103,9 +103,6 @@ def choix_partie() :
 		choix = choix_partie()
 #--------------------------------------------------------------------#
 #mise du joueur
-
-
-
 mise_joueur = compte_joueur()
 
 sabot()
