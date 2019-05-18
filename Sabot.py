@@ -5,7 +5,21 @@ import pute
 #---------------------------------------------------------------------#
 #mise du joueur
 mise_joueur = compte_joueur()
+main_joueur = sabot()
+main_ordi = sabot()
+while main_ordi < 17 :
+	sabot()
 
-sabot()
-#--------------------------------------------------------------------#
-#base de  donnée
+if main_joueur < main_ordi :
+	mise_joueur = 0 - mise_joueur
+
+elif main_joueur == main_ordi :
+	print("c'est une égalité. \n Vous repartez chacun avec votre mise ")
+
+else :
+	mise_joueur = mise_joueur * 2
+	#---------------------------------------------------------------------#
+with open("donnes, wb") as fichier :
+	mon_pickler = pickle.Pickler(fichier)
+	mon_pickler.dump(mise_joueur)
+	mon_pickler.close()
