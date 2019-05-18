@@ -3,6 +3,8 @@ import random
 import pickle
 import base_de_donnee
 #---------------------------------------------------------------------#
+
+#---------------------------------------------------------------------#
 def compte_joueur() :
 	compte_courant = 500
 	print("vous possédez actuellement",compte_courant," $")
