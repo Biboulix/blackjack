@@ -12,12 +12,6 @@ def restart_program():
 	python = sys.executable
 	os.execl(python, python, * sys.argv)
 
-def valeur_as(event):
-    valeur_as = eval(entree.get())
-    if valeur_as ==1:
-        print("Vous avez choisis 1")
-    else:
-        print("vous avez choisis 11")
 
 
 def image(sabot,nb_carte):
@@ -34,6 +28,7 @@ def image(sabot,nb_carte):
 def sabot() :
     global nb_carte
     global valeur
+    global valeur_string
 
     sabot = random.randint(1,13)
 
@@ -50,25 +45,20 @@ def sabot() :
         image(sabot,nb_carte)
 
     elif sabot == 1 :
-        entree = Entry(fen)
-        entree.bind("<Return>",valeur_as)
-        entree.place(x=1000, y=500)
         image(sabot,nb_carte)
-        valeur = valeur + eval(entree.get())
+        valeur = valeur
 
     else :
         valeur = valeur + sabot
         image(sabot,nb_carte)
 
 
-
+    #Augmente le nb de carte de 1
     nb_carte = nb_carte + 1
 
-
-    valeur_string = StringVar()
-    valeur_affichage = Label( fen, textvariable=valeur_string)
+    #Change le texte des points du joueur
     valeur_string.set(f"Vous avez {valeur} points")
-    valeur_affichage.place(x = 448, y = 825)
+
 
 
 #------------------------------------------------------------#
@@ -91,7 +81,10 @@ can.create_image(515,425, image=logo)
 nb_carte = 0
 valeur = 0
 liste_carte_img = []
-
+valeur_string = StringVar()
+valeur_affichage = Label( fen, textvariable=valeur_string)
+valeur_string.set(f"Vous avez {valeur} point")
+valeur_affichage.place(x = 448, y = 825)
 
 #--------------------------------------------------------------#
 # Bouton #
