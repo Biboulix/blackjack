@@ -34,6 +34,10 @@ def restart_program():
 	os.execl(python, python, * sys.argv)
 
 #--------------------------------------------------------------#
+def perdu():
+	can.delete(logo)
+	perdu = PhotoImage(file="imgs/perdu.gif")
+	can.create_image(1100,400, image=perdu)
 #Valeur de l'as
 def valeur_as() :
 
@@ -75,8 +79,9 @@ def sabot() :
 	global valeur_string
 
 	sabot = random.randint(1,13)
-
-	if sabot == 11 :
+	if valeur >=21:
+		perdu()
+	elif sabot == 11 :
 		valeur = valeur + 10
 		image(sabot,nb_carte)
 
@@ -103,9 +108,7 @@ def sabot() :
 #Change le texte des points du joueur
 	valeur_string.set(f"Vous avez {valeur} points")
 
-	if valeur >21:
-		sabot_button.destroy
-	return valeur
+
 
 #Tirage des cartes
 def sabot_ordi() :
@@ -158,7 +161,7 @@ fen.title('BlackJack')
 # Tapis vert #
 
 can = Canvas(fen, width =1030, height =800, bg ='sea green')
-logo = PhotoImage(file="logo.gif")
+logo = PhotoImage(file="imgs/logo.gif")
 can.create_image(515,425, image=logo)
 
 #--------------------------------------------------------------#
