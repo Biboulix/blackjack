@@ -101,32 +101,38 @@ def sabot_ordi() :
 	global coord_y_ordi
 	coord_y = coord_y_ordi[0]
 	while valeur_ordi < 17:
-
+	carte_cachee = False
 		sabot = random.randint(1,13)
 
 		if sabot == 11 :
 			valeur_ordi = valeur_ordi + 10
 			carte_ordi.append(sabot)
-			image(sabot,nb_carte,coord_y)
+			if carte_cachee == False:
+				image(sabot,nb_carte_ordi,coord_y)
 
 		elif sabot == 12 :
 			valeur_ordi = valeur_ordi + 10
 			carte_ordi.append(sabot)
-			image(sabot,nb_carte,coord_y)
+			if carte_cachee == False:
+				image(sabot,nb_carte_ordi,coord_y)
 
 		elif sabot == 13 :
 			valeur_ordi = valeur_ordi + 10
 			carte_ordi.append(sabot)
-			image(sabot,nb_carte,coord_y)
+			if carte_cachee == False:
+				image(sabot,nb_carte_ordi,coord_y)
 
 		elif sabot == 1 :
 			valeur_ordi = valeur_ordi
 			carte_ordi.append(sabot)
-			image(sabot,nb_carte,coord_y)
+			if carte_cachee == False:
+				image(sabot,nb_carte_ordi,coord_y)
 		else :
 			valeur_ordi = valeur_ordi + sabot
 			carte_ordi.append(sabot)
-			image(sabot,nb_carte,coord_y)
+			if carte_cachee == False:
+				image(sabot,nb_carte_ordi,coord_y)
+			else:
 
 		print(f"sabot {sabot}")
 #Augmente le nb de carte de 1
