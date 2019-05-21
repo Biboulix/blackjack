@@ -34,24 +34,13 @@ def restart_program():
 	os.execl(python, python, * sys.argv)
 
 #--------------------------------------------------------------#
-def perdu():
-	can.delete(logo)
-	perdu = PhotoImage(file="imgs/perdu.gif")
-	can.create_image(1100,400, image=perdu)
+
+
+
 #Valeur de l'as
-def valeur_as() :
 
-	vrai_valeur_as = int(input ("voulez vous que l'as valent 1 ou 11 ?"))
-
-	if vrai_valeur_as == 1 :
-		print("Votre as vaut désormais 1")
-		return vrai_valeur_as
-
-	else :
-		print("votre as vaut désormais 11")
-		return 11
 #Affichage des cartes
-def image(sabot,nb_carte):
+def image(sabot,nb_carte,coord_y):
     global liste_carte_img
     carte = (sabot-1) * 4
     couleur = random.randint(0,3)
@@ -59,52 +48,46 @@ def image(sabot,nb_carte):
     img = PhotoImage(file=f"./cards/" + "card{}.gif".format(carte_finale))
     liste_carte_img.append(img)
     can.image= img
-    can.create_image(coord_x[nb_carte],coord_y_joueur[0], image=img, anchor = NW)
+    can.create_image(coord_x[nb_carte],coord_y, image=img, anchor = NW)
 
-#Affichage des cartes ordi
-def image_ordi(sabot,nb_carte_ordi):
-	global liste_carte_img
-	carte = (sabot-1) * 4
-	couleur = random.randint(0,3)
-	carte_finale = carte + couleur
-	img = PhotoImage(file=f"./cards/" + "card{}.gif".format(carte_finale))
-	liste_carte_img.append(img)
-	can.image= img
-	can.create_image(coord_x[nb_carte_ordi],coord_y_ordi[0], image=img, anchor = NW)
 
 #Tirage des cartes
 def sabot() :
 	global nb_carte
 	global valeur
 	global valeur_string
-
+	global coord_y_joueur
+	coord_y = coord_y_joueur[0]
 	sabot = random.randint(1,13)
-	if valeur >=21:
-		perdu()
+
+	if valeur >21:
+		perdu = "Vous avez perdu"
+		label = Label( fen, text = perdu )
+
+		label.place(x = 1040, y = 425,anchor = W)
+
 	elif sabot == 11 :
 		valeur = valeur + 10
-		image(sabot,nb_carte)
+		image(sabot,nb_carte,coord_y)
 
 	elif sabot == 12 :
 		valeur = valeur + 10
-		image(sabot,nb_carte)
+		image(sabot,nb_carte,coord_y)
 
 	elif sabot == 13 :
 		valeur = valeur + 10
-		image(sabot,nb_carte)
+		image(sabot,nb_carte,coord_y)
 
 	elif sabot == 1 :
-		image(sabot,nb_carte)
+		image(sabot,nb_carte,coord_y)
 		valeur = valeur
 
 	else :
 		valeur = valeur + sabot
-		image(sabot,nb_carte)
-
+		image(sabot,nb_carte,coord_y)
 
 #Augmente le nb de carte de 1
 	nb_carte = nb_carte + 1
-
 #Change le texte des points du joueur
 	valeur_string.set(f"Vous avez {valeur} points")
 
@@ -114,41 +97,41 @@ def sabot() :
 def sabot_ordi() :
 	global nb_carte_ordi
 	global valeur_ordi
-	carte = []
+	global carte_ordi
+	global coord_y_ordi
+	coord_y = coord_y_ordi[0]
 	while valeur_ordi < 17:
 
 		sabot = random.randint(1,13)
 
 		if sabot == 11 :
 			valeur_ordi = valeur_ordi + 10
-			carte.append(sabot)
-
+			carte_ordi.append(sabot)
+			image(sabot,nb_carte,coord_y)
 
 		elif sabot == 12 :
 			valeur_ordi = valeur_ordi + 10
-			carte.append(sabot)
-
+			carte_ordi.append(sabot)
+			image(sabot,nb_carte,coord_y)
 
 		elif sabot == 13 :
 			valeur_ordi = valeur_ordi + 10
-			carte.append(sabot)
-
+			carte_ordi.append(sabot)
+			image(sabot,nb_carte,coord_y)
 
 		elif sabot == 1 :
 			valeur_ordi = valeur_ordi
-			carte.append(sabot)
-
+			carte_ordi.append(sabot)
+			image(sabot,nb_carte,coord_y)
 		else :
 			valeur_ordi = valeur_ordi + sabot
-			carte.append(sabot)
+			carte_ordi.append(sabot)
+			image(sabot,nb_carte,coord_y)
 
-
-		print(sabot)
+		print(f"sabot {sabot}")
 #Augmente le nb de carte de 1
 		nb_carte_ordi = nb_carte_ordi + 1
-	print(nb_carte_ordi)
-	for k in range(0,nb_carte_ordi):
-		image_ordi(carte[k],k)
+	print(f"nb_carte_ordi {nb_carte_ordi}")
 
 
 #------------------------------------------------------------#
@@ -172,7 +155,7 @@ nb_carte_ordi = 0
 valeur = 0
 valeur_ordi = 0
 liste_carte_img = []
-
+carte_ordi = []
 
 #--------------------------------------------------------------#
 #Affichage du nb de point du joueur (Initatilisation)
