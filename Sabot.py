@@ -1,23 +1,24 @@
 #coding : utf-8
 import random
 import pickle
-import pute
+import application
 #---------------------------------------------------------------------#
 #mise du joueur
-mise_joueur = compte_joueur()
-main_joueur = sabot()
-main_ordi = sabot()
+mise_joueur = application.compte_joueur()
+main_joueur = application.sabot()
 while main_ordi < 17 :
-	sabot()
+	application.sabot()
 
 if main_joueur < main_ordi :
-	mise_joueur = 0 - mise_joueur
+	mise_joueur = 0 - mise_joueur¨
+	return mise_joueur
 
 elif main_joueur == main_ordi :
 	print("c'est une égalité. \n Vous repartez chacun avec votre mise ")
 
 else :
 	mise_joueur = mise_joueur * 2
+	return mise_joueur
 	#---------------------------------------------------------------------#
 with open("donnes, wb") as fichier :
 	mon_pickler = pickle.Pickler(fichier)

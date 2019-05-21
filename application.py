@@ -13,15 +13,16 @@ def compte_joueur() :
 			mon_score = mon_dico_joueur[mon_pseudo]
 		else :
 			mon_dico_joueur[mon_pseudo] = 500
+			mon_score = mon_dico_joueur[mon_pseudo]
 
 	print("vous possédez actuellement",mon_dico_joueur[mon_pseudo]," $")
 	mise = int(input("combien voulez vous misez ?"))
-	while mise > compte_courant :
+	while mise > mon_score :
 		print("vous ne pouvez pas miser plus que vous ne possédez !")
 		mise = int(input("Donc combien voulez vous vraiment miser ?"))
 		return mise
-	compte_courant == compte_courant - mise
-	return compte_courant
+		mon_score =- mise
+		return mon_score
 
 #Recommencer le programe
 def restart_program():
@@ -86,6 +87,16 @@ def sabot() :
 
     #Change le texte des points du joueur
     valeur_string.set(f"Vous avez {valeur} points")
+
+
+def blackjack() :
+	global main_joueur
+	global mise_joueur
+	if main_joueur == 21 :
+		print("vous avez un blackjack")
+		mise_joueur = mise_joueur * 2
+		return mise_joueur
+
 
 
 
