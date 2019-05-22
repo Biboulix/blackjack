@@ -240,14 +240,14 @@ def sabot_ordi() : #Comme Sabot pour le joueur mais avec des parties TK spécial
 # Fenetre master
 
 fen = Tk()
-fen.title('BlackJack')
+fen.title('BlackJack') #Change le nom de la page
 
 #--------------------------------------------------------------#
 # Tapis vert #
 
-can = Canvas(fen, width =1030, height =800, bg ='sea green')
-logo = PhotoImage(file="imgs/logo.gif")
-can.create_image(515,425, image=logo)
+can = Canvas(fen, width =1030, height =800, bg ='sea green') #Créer une fenêtre verte "Tapis"
+logo = PhotoImage(file="imgs/logo.gif") #Affiche le logo pris sur internet
+can.create_image(515,425, image=logo) #place l'image dans le canvas
 
 #--------------------------------------------------------------#
 # Variables Globales
