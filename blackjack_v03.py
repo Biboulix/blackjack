@@ -34,21 +34,44 @@ def restart_program():
 	os.execl(python, python, * sys.argv)
 
 #--------------------------------------------------------------#
+def afficher_carte_cachee():
+    global liste_carte_img
+    global coord_y_ordi
+    global carte_ordi
+    global nb_carte_ordi
+    for k in range(0,nb_carte_ordi):
+        carte = (carte_ordi[k]-1) * 4
+        couleur = random.randint(0,3)
+        carte_finale = carte + couleur
+        img = PhotoImage(file=f"./cards/" + "card{}.gif".format(carte_finale))
+        liste_carte_img.append(img)
+        can.image= img
+        can.create_image(coord_x[k],coord_y_ordi[0], image=img, anchor = NW)
+
+
 
 def stop():
     global valeur
     global valeur_ordi
-
-    if valeur > valeur_ordi:
+    afficher_carte_cachee()
+    if valeur > valeur_ordi and valeur <21:
         text = StringVar()
         text_affichage = Label( fen, textvariable=text)
         text.set(f"Vous avez gagné")
         text_affichage.place(x = 1050, y = 425,anchor = W)
-    elif valeur_ordi > valeur:
+    elif valeur_ordi > valeur and valeur_ordi<21:
         text = StringVar()
         text_affichage = Label( fen, textvariable=text)
         text.set(f"Vous avez perdu")
         text_affichage.place(x = 1050, y = 425,anchor = W)
+    elif valeur_ordi == 21:
+        text = "L'ordi a gagné avec un blackjack"
+        label = Label( fen, text = text )
+        label.place(x = 1050, y = 425,anchor = W)
+    elif valeur == 21:
+        text = "Vous avez gagné avec un blackjack"
+        label = Label( fen, text = text )
+        label.place(x = 1050, y = 425,anchor = W)
     else:
         text = StringVar()
         text_affichage = Label( fen, textvariable=text)
@@ -58,17 +81,21 @@ def stop():
 def verification(valeur = 0, valeur_ordi=0):
     global sabot_button
     if valeur > 21:
+        afficher_carte_cachee()
         text = "Vous avez perdu"
         label = Label( fen, text = text )
         label.place(x = 1050, y = 425,anchor = W)
         perdu = True
         return perdu
-    if valeur_ordi > 21:
+
+    elif valeur_ordi > 21:
+        afficher_carte_cachee()
         text = "L'ordi a perdu"
         label = Label( fen, text = text )
         label.place(x = 1050, y = 425,anchor = W)
         perdu = True
         return perdu
+
     else:
         perdu = False
         return perdu
@@ -84,6 +111,13 @@ def image(sabot,nb_carte,coord_y):
     can.image= img
     can.create_image(coord_x[nb_carte],coord_y, image=img, anchor = NW)
 
+def image_cache(nb_carte_ordi):
+	global liste_carte_img
+	global coord_y_ordi
+	img = PhotoImage(file="./cards/back.gif")
+	liste_carte_img.append(img)
+	can.image= img
+	can.create_image(coord_x[nb_carte_ordi],coord_y_ordi, image=img, anchor = NW)
 
 #Tirage des cartes
 def sabot() :
@@ -147,32 +181,54 @@ def sabot_ordi() :
             carte_ordi.append(sabot)
             if carte_cachee == False:
                 image(sabot,nb_carte_ordi,coord_y)
+            else:
+                image_cache(nb_carte_ordi)
 
         elif sabot == 12 :
             valeur_ordi = valeur_ordi + 10
             carte_ordi.append(sabot)
             if carte_cachee == False:
                 image(sabot,nb_carte_ordi,coord_y)
+            else:
+                image_cache(nb_carte_ordi)
 
         elif sabot == 13 :
             valeur_ordi = valeur_ordi + 10
             carte_ordi.append(sabot)
             if carte_cachee == False:
                 image(sabot,nb_carte_ordi,coord_y)
+            else:
+                image_cache(nb_carte_ordi)
 
         elif sabot == 1 :
-            valeur_ordi = valeur_ordi
+            valeur_as = 11
+            valeur_test = valeur_as + valeur_ordi
+            if valeur_test > 21:
+                valeur_as = 1
+                valeur_ordi = valeur_as + valeur_ordi
+            else:
+                valeur_ordi = valeur_as + valeur_ordi
             carte_ordi.append(sabot)
             if carte_cachee == False:
                 image(sabot,nb_carte_ordi,coord_y)
+            else:
+                image_cache(nb_carte_ordi)
+
+
         else :
             valeur_ordi = valeur_ordi + sabot
             carte_ordi.append(sabot)
             if carte_cachee == False:
                 image(sabot,nb_carte_ordi,coord_y)
+            else:
+                image_cache(nb_carte_ordi)
+
+
+        carte_cachee = True
         print(f"sabot {sabot}")
         #Augmente le nb de carte de 1
         nb_carte_ordi = nb_carte_ordi + 1
+
     print(f"nb_carte_ordi {nb_carte_ordi}")
     valeur_string_ordi.set(f"Ordi a {valeur_ordi} points")
     perdu =verification(valeur,valeur_ordi)
