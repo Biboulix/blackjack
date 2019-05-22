@@ -58,12 +58,12 @@ def stop():
         text_affichage = Label( fen, textvariable=text)
         text.set(f"Vous avez perdu")
         text_affichage.place(x = 1050, y = 425,anchor = W)
-    elif valeur_ordi == 21:
-        text = "L'ordi a gagné avec un blackjack"
-        label = Label( fen, text = text )
-        label.place(x = 1050, y = 425,anchor = W)
     elif valeur == 21:
         text = "Vous avez gagné avec un blackjack"
+        label = Label( fen, text = text )
+        label.place(x = 1050, y = 425,anchor = W)
+    elif valeur_ordi == 21:
+        text = "L'ordi a gagné avec un blackjack"
         label = Label( fen, text = text )
         label.place(x = 1050, y = 425,anchor = W)
     else:
