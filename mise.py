@@ -1,3 +1,7 @@
+import random
+import pickle
+import application
+
 def compte_joueur() :
 	with open("donnees", "rb") as fichier :
 		mon_depickler = pickle.Unpickler(fichier)
