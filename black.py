@@ -17,16 +17,29 @@ def compte_joueur() :
 			mon_score = mon_dico_joueur[mon_pseudo]
 		else :
 			mon_dico_joueur[mon_pseudo] = 500
+			mon_score = mon_dico_joueur[mon_pseudo]
 
 	print("vous possédez actuellement",mon_dico_joueur[mon_pseudo]," $")
 	mise = int(input("combien voulez vous misez ?"))
-	while mise > compte_courant :
+	while mise > mon_score :
 		print("vous ne pouvez pas miser plus que vous ne possédez !")
 		mise = int(input("Donc combien voulez vous vraiment miser ?"))
 		return mise
-	compte_courant == compte_courant - mise
-	return compte_courant
+		mon_score =- mise
+		return mon_score
 
+#Valeur de l'as
+def valeur_as() :
+
+	vrai_valeur_as = int(input ("voulez vous que l'as valent 1 ou 11 ?"))
+
+	if vrai_valeur_as == 1 :
+		print("Votre as vaut désormais 1")
+		return vrai_valeur_as
+
+	else :
+		print("votre as vaut désormais 11")
+		return 11
 
 #Recommencer le programe
 def restart_program():
@@ -146,8 +159,10 @@ def sabot() :
             image(sabot,nb_carte,coord_y)
 
         elif sabot == 1 :
+
             image(sabot,nb_carte,coord_y)
-            valeur = valeur
+            sabot = valeur_as()
+            valeur = valeur + sabot
 
         else:
             valeur = valeur + sabot
@@ -280,3 +295,10 @@ sabot_ordi()
 # Initatilisation de fenetre master
 can.place(x = 0, y = 20)
 fen.mainloop()
+
+
+
+with open("donnes, wb") as fichier :
+	mon_pickler = pickle.Pickler(fichier)
+	mon_pickler.dump(mise_joueur)
+	mon_pickler.close()
