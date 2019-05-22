@@ -36,42 +36,52 @@ def restart_program():
 #--------------------------------------------------------------#
 
 def stop():
-    global valeur
-    global valeur_ordi
+	global valeur
+	global valeur_ordi
 
-    if valeur > valeur_ordi:
-        text = StringVar()
-        text_affichage = Label( fen, textvariable=text)
-        text.set(f"Vous avez gagné")
-        text_affichage.place(x = 1050, y = 425,anchor = W)
-    elif valeur_ordi > valeur:
-        text = StringVar()
-        text_affichage = Label( fen, textvariable=text)
-        text.set(f"Vous avez perdu")
-        text_affichage.place(x = 1050, y = 425,anchor = W)
-    else:
-        text = StringVar()
-        text_affichage = Label( fen, textvariable=text)
-        text.set(f"Egalité")
-        text_affichage.place(x = 1050, y = 425,anchor = W)
+	if valeur > valeur_ordi and valeur <21:
+		text = StringVar()
+		text_affichage = Label( fen, textvariable=text)
+		text.set(f"Vous avez gagné")
+		text_affichage.place(x = 1050, y = 425,anchor = W)
+	elif valeur_ordi > valeur and valeur_ordi<21:
+		text = StringVar()
+		text_affichage = Label( fen, textvariable=text)
+		text.set(f"Vous avez perdu")
+		text_affichage.place(x = 1050, y = 425,anchor = W)
+	elif valeur_ordi == 21:
+		text = "L'ordi a gagné avec un blackjack"
+		label = Label( fen, text = text )
+		label.place(x = 1050, y = 425,anchor = W)
+	elif valeur == 21:
+		text = "Vous avez gagné avec un blackjack"
+		label = Label( fen, text = text )
+		label.place(x = 1050, y = 425,anchor = W)
+	else:
+		text = StringVar()
+		text_affichage = Label( fen, textvariable=text)
+		text.set(f"Egalité")
+		text_affichage.place(x = 1050, y = 425,anchor = W)
 
 def verification(valeur = 0, valeur_ordi=0):
-    global sabot_button
-    if valeur > 21:
-        text = "Vous avez perdu"
-        label = Label( fen, text = text )
-        label.place(x = 1050, y = 425,anchor = W)
-        perdu = True
-        return perdu
-    if valeur_ordi > 21:
-        text = "L'ordi a perdu"
-        label = Label( fen, text = text )
-        label.place(x = 1050, y = 425,anchor = W)
-        perdu = True
-        return perdu
-    else:
-        perdu = False
-        return perdu
+	global sabot_button
+	if valeur > 21:
+		text = "Vous avez perdu"
+		label = Label( fen, text = text )
+		label.place(x = 1050, y = 425,anchor = W)
+		perdu = True
+		return perdu
+
+	if valeur_ordi > 21:
+		text = "L'ordi a perdu"
+		label = Label( fen, text = text )
+		label.place(x = 1050, y = 425,anchor = W)
+		perdu = True
+		return perdu
+
+	else:
+		perdu = False
+		return perdu
 
 #Affichage des cartes
 def image(sabot,nb_carte,coord_y):
@@ -84,6 +94,14 @@ def image(sabot,nb_carte,coord_y):
     can.image= img
     can.create_image(coord_x[nb_carte],coord_y, image=img, anchor = NW)
 
+def image_cache(nb_carte_ordi):
+	global liste_carte_img
+	global carte_ordi
+	global coord_y_ordi
+	img = PhotoImage(file="./cards/back.gif")
+	liste_carte_img.append(img)
+	can.image= img
+	can.create_image(coord_x[nb_carte_ordi],coord_y_ordi, image=img, anchor = NW)
 
 #Tirage des cartes
 def sabot() :
@@ -131,51 +149,63 @@ def sabot() :
 
 #Tirage des cartes
 def sabot_ordi() :
-    global nb_carte_ordi
-    global valeur_ordi
-    global carte_ordi
-    global coord_y_ordi
-    global valeur
-    coord_y = coord_y_ordi[0]
-    carte_cachee = False
-    while valeur_ordi < 17:
+	global nb_carte_ordi
+	global valeur_ordi
+	global carte_ordi
+	global coord_y_ordi
+	global valeur
+	coord_y = coord_y_ordi[0]
+	carte_cachee = False
+	while valeur_ordi < 17:
 
-        sabot = random.randint(1,13)
+		sabot = random.randint(1,13)
 
-        if sabot == 11 :
-            valeur_ordi = valeur_ordi + 10
-            carte_ordi.append(sabot)
-            if carte_cachee == False:
-                image(sabot,nb_carte_ordi,coord_y)
+		if sabot == 11 :
+			valeur_ordi = valeur_ordi + 10
+			carte_ordi.append(sabot)
+			if carte_cachee == False:
+				image(sabot,nb_carte_ordi,coord_y)
+			else:
+				image_cache(nb_carte_ordi)
 
-        elif sabot == 12 :
-            valeur_ordi = valeur_ordi + 10
-            carte_ordi.append(sabot)
-            if carte_cachee == False:
-                image(sabot,nb_carte_ordi,coord_y)
+		elif sabot == 12 :
+			valeur_ordi = valeur_ordi + 10
+			carte_ordi.append(sabot)
+			if carte_cachee == False:
+				image(sabot,nb_carte_ordi,coord_y)
+			else:
+				image_cache(nb_carte_ordi)
 
-        elif sabot == 13 :
-            valeur_ordi = valeur_ordi + 10
-            carte_ordi.append(sabot)
-            if carte_cachee == False:
-                image(sabot,nb_carte_ordi,coord_y)
+		elif sabot == 13 :
+			valeur_ordi = valeur_ordi + 10
+			carte_ordi.append(sabot)
+			if carte_cachee == False:
+				image(sabot,nb_carte_ordi,coord_y)
+			else:
+				image_cache(nb_carte_ordi)
 
-        elif sabot == 1 :
-            valeur_ordi = valeur_ordi
-            carte_ordi.append(sabot)
-            if carte_cachee == False:
-                image(sabot,nb_carte_ordi,coord_y)
-        else :
-            valeur_ordi = valeur_ordi + sabot
-            carte_ordi.append(sabot)
-            if carte_cachee == False:
-                image(sabot,nb_carte_ordi,coord_y)
-        print(f"sabot {sabot}")
-        #Augmente le nb de carte de 1
-        nb_carte_ordi = nb_carte_ordi + 1
-    print(f"nb_carte_ordi {nb_carte_ordi}")
-    valeur_string_ordi.set(f"Ordi a {valeur_ordi} points")
-    perdu =verification(valeur,valeur_ordi)
+		elif sabot == 1 :
+			valeur_ordi = valeur_ordi
+			carte_ordi.append(sabot)
+			if carte_cachee == False:
+				image(sabot,nb_carte_ordi,coord_y)
+			else:
+				image_cache(nb_carte_ordi)
+		else :
+			valeur_ordi = valeur_ordi + sabot
+			carte_ordi.append(sabot)
+			if carte_cachee == False:
+				image(sabot,nb_carte_ordi,coord_y)
+			else:
+				image_cache(nb_carte_ordi)
+		carte_cachee = True
+		print(f"sabot {sabot}")
+		#Augmente le nb de carte de 1
+		nb_carte_ordi = nb_carte_ordi + 1
+
+	print(f"nb_carte_ordi {nb_carte_ordi}")
+	valeur_string_ordi.set(f"Ordi a {valeur_ordi} points")
+	perdu =verification(valeur,valeur_ordi)
 
 
 #------------------------------------------------------------#

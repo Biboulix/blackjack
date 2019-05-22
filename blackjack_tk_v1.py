@@ -37,7 +37,15 @@ def restart_program():
 
 
 
-#Valeur de l'as
+def verification(valeur = 0, valeur_ordi=0):
+	global sabot_button
+	if valeur > 21:
+		perdu = "Vous avez perdu"
+		label = Label( fen, text = perdu )
+		label.place(x = 1040, y = 425,anchor = W)
+		perdu = True
+		return perdu
+
 
 #Affichage des cartes
 def image(sabot,nb_carte,coord_y):
@@ -59,32 +67,33 @@ def sabot() :
 	global coord_y_joueur
 	coord_y = coord_y_joueur[0]
 	sabot = random.randint(1,13)
+	perdu = False
 
-	if valeur >21:
-		perdu = "Vous avez perdu"
-		label = Label( fen, text = perdu )
+	if perdu == False:
+		if sabot == 11 :
+			valeur = valeur + 10
+			image(sabot,nb_carte,coord_y)
 
-		label.place(x = 1040, y = 425,anchor = W)
 
-	elif sabot == 11 :
-		valeur = valeur + 10
-		image(sabot,nb_carte,coord_y)
+		elif sabot == 12 :
+			valeur = valeur + 10
+			image(sabot,nb_carte,coord_y)
 
-	elif sabot == 12 :
-		valeur = valeur + 10
-		image(sabot,nb_carte,coord_y)
+		elif sabot == 13 :
+			valeur = valeur + 10
+			image(sabot,nb_carte,coord_y)
 
-	elif sabot == 13 :
-		valeur = valeur + 10
-		image(sabot,nb_carte,coord_y)
+		elif sabot == 1 :
+			image(sabot,nb_carte,coord_y)
+			valeur = valeur
 
-	elif sabot == 1 :
-		image(sabot,nb_carte,coord_y)
-		valeur = valeur
+		else:
+			valeur = valeur + sabot
+			image(sabot,nb_carte,coord_y)
 
-	else :
-		valeur = valeur + sabot
-		image(sabot,nb_carte,coord_y)
+		verification(valeur)
+	else:
+		print("Gagné")
 
 #Augmente le nb de carte de 1
 	nb_carte = nb_carte + 1
@@ -100,8 +109,9 @@ def sabot_ordi() :
 	global carte_ordi
 	global coord_y_ordi
 	coord_y = coord_y_ordi[0]
-	while valeur_ordi < 17:
 	carte_cachee = False
+	while valeur_ordi < 17:
+
 		sabot = random.randint(1,13)
 
 		if sabot == 11 :
@@ -132,7 +142,7 @@ def sabot_ordi() :
 			carte_ordi.append(sabot)
 			if carte_cachee == False:
 				image(sabot,nb_carte_ordi,coord_y)
-			else:
+
 
 		print(f"sabot {sabot}")
 #Augmente le nb de carte de 1
