@@ -18,9 +18,9 @@ elif main_joueur == main_ordi :
 
 else :
 	mise_joueur = mise_joueur * 2
-	
+
 	#---------------------------------------------------------------------#
-with open("donnes, wb") as fichier :
+with open("donnes, ab") as fichier :
 	mon_pickler = pickle.Pickler(fichier)
-	mon_pickler.dump(mise_joueur)
+	mon_pickler.dump(mise)
 	mon_pickler.close()
