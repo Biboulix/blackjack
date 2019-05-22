@@ -18,7 +18,7 @@ def compte_joueur() :
 		else :
 			mon_dico_joueur[mon_pseudo] = 500
 
-	print("vous possédez actuellement",mon_dico_joueur[mon_pseudo]," $")
+	print("vous possédez actuellement",mon_score," $")
 	mise = int(input("combien voulez vous misez ?"))
 	while mise > compte_courant :
 		print("vous ne pouvez pas miser plus que vous ne possédez !")

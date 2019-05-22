@@ -10,15 +10,15 @@ while main_ordi < 17 :
 	application.sabot()
 
 if main_joueur < main_ordi :
-	mise_joueur = 0 - mise_joueur¨
-	return mise_joueur
+	mise_joueur = 0 - mise_joueur
+
 
 elif main_joueur == main_ordi :
 	print("c'est une égalité. \n Vous repartez chacun avec votre mise ")
 
 else :
 	mise_joueur = mise_joueur * 2
-	return mise_joueur
+	
 	#---------------------------------------------------------------------#
 with open("donnes, wb") as fichier :
 	mon_pickler = pickle.Pickler(fichier)
