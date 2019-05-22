@@ -208,7 +208,6 @@ def sabot_ordi() :
                 valeur_ordi = valeur_as + valeur_ordi
             else:
                 valeur_ordi = valeur_as + valeur_ordi
-
             carte_ordi.append(sabot)
             if carte_cachee == False:
                 image(sabot,nb_carte_ordi,coord_y)
