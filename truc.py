@@ -6,27 +6,6 @@ import os
 import pickle
 
 #---------------------------------------------------------------------------#
-#Fonctions
-def compte_joueur() :
-	with open("donnees", "rb") as fichier :
-		mon_depickler = pickle.Unpickler(fichier)
-		mon_dico_joueur = mon_depickler.load()
-
-		mon_pseudo = input("Veuillez entrer votre pseudo : \n ")
-		if mon_pseudo in mon_dico_joueur.keys() :
-			mon_score = mon_dico_joueur[mon_pseudo]
-		else :
-			mon_dico_joueur[mon_pseudo] = 500
-
-	print("vous possédez actuellement",mon_score," $")
-	mise = int(input("combien voulez vous misez ?"))
-	while mise > compte_courant :
-		print("vous ne pouvez pas miser plus que vous ne possédez !")
-		mise = int(input("Donc combien voulez vous vraiment miser ?"))
-		return mise
-	compte_courant == compte_courant - mise
-	return compte_courant
-
 
 #Recommencer le programe
 def restart_program():
