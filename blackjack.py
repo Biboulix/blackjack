@@ -221,12 +221,9 @@ def sabot_ordi() :
 
 
         carte_cachee = True
-        print(f"sabot {sabot}")
         #Augmente le nb de carte de 1
         nb_carte_ordi = nb_carte_ordi + 1
 
-    print(f"nb_carte_ordi {nb_carte_ordi}")
-    valeur_string_ordi.set(f"Ordi a {valeur_ordi} points")
     perdu =verification(valeur,valeur_ordi)
 
 
@@ -260,10 +257,6 @@ valeur_affichage = Label( fen, textvariable=valeur_string)
 valeur_string.set(f"Vous avez {valeur} point")
 valeur_affichage.place(x = 448, y = 825)
 
-valeur_string_ordi = StringVar()
-valeur_affichage_ordi = Label( fen, textvariable=valeur_string_ordi)
-valeur_string_ordi.set(f"Vous avez {valeur_ordi} point")
-valeur_affichage_ordi.place(x = 448, y = 0)
 #--------------------------------------------------------------#
 # Boutons #
 
